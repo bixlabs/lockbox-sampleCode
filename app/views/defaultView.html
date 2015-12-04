@@ -1,0 +1,29 @@
+<table class="col-md-12">
+  <tr ng-repeat="i in [] | range : (lockboxTotal / dashboardColumnCount) + 1">
+    <td class="col-md-3" ng-repeat="j in [] | range : dashboardColumnCount" ng-show="lockboxes[i * dashboardColumnCount + j]">
+      <button class='btn btn-primary btn-lg btn-margins'
+              ng-class="[ { 'btn-primary' : lockboxes[i * dashboardColumnCount + j].keys.length > 0 },
+              { 'btn-danger' : !(lockboxes[i * dashboardColumnCount + j].keys.length > 0) }]"
+              ng-click="getKey(i * dashboardColumnCount + j)">
+        {{ lockboxes[i * dashboardColumnCount + j].name }}
+      </button>
+    </td>
+  </tr>
+  <tr>
+    <td class="col-md-3">
+      <button class='btn btn-primary btn-lg btn-margins' ng-click="createNewLockbox()">Create New Lockbox</button>
+    </td>
+  </tr>
+</table>
+
+<ul id="example-messages" class="example-chat-messages">
+  <li ng-repeat="msg in messages">
+    <strong class="example-chat-username">{{ msg.$id }}</strong>
+    {{ msg.$value }}
+  </li>
+</ul>
+
+
+<div class="sample Roboto-normal-400 text-center" style="font-size:28px" ng-show="generatedKey.hasValue">The last generated key is {{ generatedKey.value }}</div>
+<div class="sample Roboto-normal-400 text-center" style="font-size:28px" ng-show="generatedKey && !generatedKey.hasValue">The selected lockbox doesn't have any keys left</div>
+<div class="sample Roboto-normal-400 text-center" style="font-size:28px" ng-show="generatedKey.hasValue">There are {{ generatedKey.remainingKeys }} keys remaining</div>
